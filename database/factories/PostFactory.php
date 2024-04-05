@@ -18,11 +18,14 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $date = fake()->dateTimeBetween('-1 day' );
         return [
             'category_id' => fake()->randomElement(Category::pluck('id')),
             'title' => fake()->name(),
             'description' => fake()->paragraph(),
-            'user_id' => fake()->randomElement(User::pluck('id'))
+            'user_id' => fake()->randomElement(User::pluck('id')),
+            'created_at' => $date,
+            'updated_at' => $date
         ];
     }
 }
