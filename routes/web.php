@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 // List all posts
 Route::get('/', function () {
 
-    $posts = Post::with('category')->with('user')->orderby('created_at', 'DESC')->get();
+    $posts = Post::with('category')->with('user')->orderby('created_at', 'DESC')->simplePaginate(3);
 
     return view('posts.index', [
         'posts' => $posts
