@@ -3,24 +3,22 @@
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
+// List all posts
 Route::get('/', function () {
 
-    $posts = Post::orderby('created_at', 'DESC')->get();
+    $posts = Post::with('category')->with('user')->orderby('created_at', 'DESC')->get();
 
-    return view('home', [
+    return view('posts.index', [
         'posts' => $posts
     ]);
 });
 
+// Show
 Route::get('/post/{id}', function ($id) {
 
-    $post = Post::find($id);
+    $post = Post::findOrFail($id);
 
-    if (! $post) {
-        abort(404);
-    }
-
-    return view('post', [
+    return view('posts.show', [
         'post' => $post
     ]);
 
