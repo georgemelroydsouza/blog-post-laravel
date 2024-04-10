@@ -13,6 +13,13 @@ Route::get('/', function () {
     ]);
 });
 
+// Display Create Post Form
+Route::get('/post/create', function () {
+
+    return view('posts.create');
+
+});
+
 // Show
 Route::get('/post/{id}', function ($id) {
 
