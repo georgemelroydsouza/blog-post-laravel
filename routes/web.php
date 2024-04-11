@@ -41,7 +41,6 @@ Route::get('/posts/{id}', function ($id) {
 });
 
 // Store
-
 Route::post('/posts', function () {
     // validate
     request()->validate([
@@ -64,6 +63,23 @@ Route::post('/posts', function () {
 });
 
 // Edit
+Route::get('/posts/{id}/edit', function ($id) {
+
+    // fetch all categories and pass it to the view
+    $categories = Category::select('id', 'name')
+                            ->orderby('name', 'ASC')
+                            ->get()
+                            ->toArray();
+
+    $post = Post::findOrFail($id);
+
+    return view('posts.edit', [
+        'categories' => $categories,
+        'post' => $post
+    ]);
+
+});
+
 
 // Update
 
