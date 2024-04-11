@@ -8,11 +8,14 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with('category')
-                        ->with('user')
-                        ->orderby('created_at', 'DESC')
+        $tempPosts = Post::with('category')->with('user');
+        if ($request->search) {
+            $tempPosts->where('title', "LIKE", "%" . $request->search . "%")
+                ->orWhere('description', "LIKE", "%" . $request->search . "%");
+        }
+        $posts = $tempPosts->orderby('created_at', 'DESC')
                         ->simplePaginate(3);
 
         return view('posts.index', [

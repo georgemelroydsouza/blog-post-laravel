@@ -9,7 +9,7 @@
     </p>
 
     <p class="mt-6 flex justify-start">
-        <x-buttons.button href="/posts/{{ $post->id }}/edit">Edit</x-buttons.button>
+        <x-buttons.href href="/posts/{{ $post->id }}/edit">Edit</x-buttons.href>
 
     </p>
 

@@ -3,9 +3,17 @@
 <!-- START CONTENT -->
 <div class="bg-white py-8 sm:py-15">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
+
+        <form action="/" method="GET">
+            <div>
+                <x-inputs.text placeholder="Enter the search string" name="search" value="{{ old('search', request('search')) }}"></x-inputs.text>
+                <div class="mt-6">
+                    <x-buttons.button >Search</x-button.button>
+                </div>
+            </div>
+        </form>
+
         <div class="mx-auto mt-1 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-gray-200 pt-1 sm:mt-3 sm:pt-5 lg:max-w-none lg:grid-cols-3">
-
-
 
             @foreach ($posts as $post)
 
@@ -43,7 +51,7 @@
         <!-- More posts... -->
       </div>
       <div class="mt-10">
-        {{ $posts->links() }}
+        {{ $posts->withQueryString()->links() }}
       </div>
 
     </div>
