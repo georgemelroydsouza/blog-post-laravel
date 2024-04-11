@@ -15,7 +15,7 @@ Route::get('/', function () {
 });
 
 // Display Create Post Form
-Route::get('/post/create', function () {
+Route::get('/posts/create', function () {
 
     // fetch all categories and pass it to the view
     $categories = Category::select('id', 'name')
@@ -30,7 +30,7 @@ Route::get('/post/create', function () {
 });
 
 // Show
-Route::get('/post/{id}', function ($id) {
+Route::get('/posts/{id}', function ($id) {
 
     $post = Post::findOrFail($id);
 
@@ -39,6 +39,35 @@ Route::get('/post/{id}', function ($id) {
     ]);
 
 });
+
+// Store
+
+Route::post('/posts', function () {
+    // validate
+    request()->validate([
+        'title' => ['required', 'min:3'],
+        'description' => ['required', 'min:5']
+    ]);
+
+    // authorize
+
+    // save
+    Post::create([
+        'category_id' => request('category_id'),
+        'title' => request('title'),
+        'description' => request('description'),
+        'user_id' => 1
+    ]);
+
+    return redirect('/');
+
+});
+
+// Edit
+
+// Update
+
+// Destroy
 
 Route::get('/about', function () {
     return view('about');
