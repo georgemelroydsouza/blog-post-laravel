@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,15 @@ Route::get('/', function () {
 // Display Create Post Form
 Route::get('/post/create', function () {
 
-    return view('posts.create');
+    // fetch all categories and pass it to the view
+    $categories = Category::select('id', 'name')
+                            ->orderby('name', 'ASC')
+                            ->get()
+                            ->toArray();
+
+    return view('posts.create', [
+        'categories' => $categories
+    ]);
 
 });
 
