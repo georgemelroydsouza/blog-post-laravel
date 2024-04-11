@@ -4,8 +4,7 @@
 
     <form method="POST" action="/posts/{{ $post->id }}">
         @csrf
-        @patch
-
+        @method('PATCH')
         <div class="space-y-12">
         <div class="border-b border-gray-900/10 pb-12">
             <h2 class="text-base font-semibold leading-7 text-gray-900">Edit Post: {{ $post->title }}</h2>

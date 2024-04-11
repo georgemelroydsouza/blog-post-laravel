@@ -80,8 +80,26 @@ Route::get('/posts/{id}/edit', function ($id) {
 
 });
 
-
 // Update
+Route::patch('/posts/{id}', function ($id) {
+
+    // validate
+    request()->validate([
+        'title' => ['required', 'min:3'],
+        'description' => ['required', 'min:5']
+    ]);
+
+    // authorize
+
+    // save
+    Post::findOrFail($id)->update([
+        'category_id' => request('category_id'),
+        'title' => request('title'),
+        'description' => request('description')
+    ]);
+
+    return redirect('/posts/' . $id);
+});
 
 // Destroy
 
