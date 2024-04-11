@@ -67,10 +67,22 @@
 
         </div>
 
-        <div class="mt-6 flex items-center justify-end gap-x-6">
-        <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-        <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Update</button>
+        <div class="mt-6 flex items-center justify-between gap-x-6">
+            <div>
+                <button form="delete-form" class="text-sm font-semibold leading-6 text-red-900" >Delete</button>
+            </div>
+            <div class="flex items-center gap-x-6">
+                <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+                <div>
+                    <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Update</button>
+                </div>
+            </div>
         </div>
+
+    </form>
+    <form method="POST" class="hidden" id="delete-form" action="/posts/{{ $post->id }}">
+        @csrf
+        @method('DELETE')
     </form>
 
 

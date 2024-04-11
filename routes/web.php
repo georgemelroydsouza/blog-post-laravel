@@ -102,6 +102,11 @@ Route::patch('/posts/{id}', function ($id) {
 });
 
 // Destroy
+Route::delete('/posts/{id}', function ($id) {
+    Post::findOrFail($id)->delete();
+
+    return redirect('/');
+});
 
 Route::get('/about', function () {
     return view('about');
